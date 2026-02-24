@@ -11,7 +11,8 @@ int main(){
 
     int opcao = 0, subop = 0;//arquivo a ser carregado
 
-    while (opcao!=5){
+    while (opcao!=5)
+    {
   
         menu();
         if (scanf("%d", &opcao) != 1) { // se o que o usuario digitar não for um numero inteiro 
@@ -32,26 +33,15 @@ int main(){
             
             system("cls");
             
-            if(fp == NULL){ //não abriu o arquivo
+            if(fp == NULL)
+            { //não abriu o arquivo
                 printf("Erro ao abrir arquivo.\n");
-            }else{
+            }else
+            {
                 submenu2();
-            }
-            
-        
-            break;
-        
-        case 3:
-
-            system("cls");
-            
-            if(fp == NULL){ //não abriu o arquivo
-                printf("Erro ao abrir arquivo.\n");
-            }else{
-                submenu3();
                 scanf("%d",&subop);
-
-                switch (subop){
+                switch (subop)
+                {
                     case 1:
                         
                         int posicao = buscaLinear(); //PARAMETROS DA F: array do arquivo juntamente o elemento que se quer encontrar
@@ -74,6 +64,22 @@ int main(){
                     default:
                         break;
                 }
+            }
+            break;
+        
+        case 3:
+
+            system("cls");
+            
+            if(fp == NULL)
+            {    //não abriu o arquivo
+                printf("Erro ao abrir arquivo.\n");
+            }else
+            {
+                submenu3();
+                scanf("%d",&subop);
+                
+
             }
             
 
