@@ -4,11 +4,15 @@
 #include "functions/ordenaf.h"
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+
+
 
 int main()
 {
 
     FILE *fp = NULL; // arquivo nao aberto ainda
+    FILE *log = NULL; //arquivo de log
     int tam=1; // tamanho inicial do vetor
     int *vet=(int*)malloc(tam*sizeof(int));
     int i=0; // variavel para rodar o vetor ao ser editado
@@ -17,6 +21,8 @@ int main()
     char arq[50]; // nome do arquivo
     int resultado;
     int opcao = 0, subop = 0;//arquivo a ser carregado
+    int cont = 0; //conta quantas vezes um algoritmo foi executado
+
 
     while (opcao!=5)
     {
@@ -24,7 +30,7 @@ int main()
         menu();
         if (scanf("%d", &opcao) != 1) 
         { // se o que o usuario digitar não for um numero inteiro 
-            printf("Entrada inválida!\n");
+            printf("Entrada invalida!\n");
             while (getchar() != '\n'); // limpa buffer
             opcao = 0;
         }
@@ -58,7 +64,7 @@ int main()
             case 2:
             
                 if(fp == NULL){ //não abriu o arquivo
-                    printf("Erro ao abrir arquivo, carregue a opção 1 e tente novamente.\n");
+                    printf("Erro ao abrir arquivo, carregue a opcao 1 e tente novamente.\n");
                     break;
                 }
                 else
@@ -82,6 +88,7 @@ int main()
                                 break;                           
                             default :// retornou um positivo, ou seja, a posicao dele no vetor                           
                                 printf("O numero esta na posicao %d do vetor\n",resultado+1);
+                                cont++;
                                 break;                                
                         }
                         break;
@@ -104,6 +111,7 @@ int main()
                             default:// ultima opcao de retorno da função, um numero positivo, ou seja, a posicao no vetor
                             
                                 printf("Valor na posicao %d do vetor\n",resultado+1);   
+                                cont++;
                                 break;   
                             
                         }
@@ -123,13 +131,69 @@ int main()
                     printf("Erro ao abrir arquivo, carregue a opção 1 e tente novamente.\n");
                 }
 
+                submenu3();
+                scanf("%d",&subop);
                 
+                switch (subop)
+                {
+                case 1: //InsertSort
+                    
+                    insertSort(vet,tam-1);
+                    printf("Vetor ordenado por Insert Sort!\n");
+                    cont++;
+
+                    break;
+                case 2: //Bubble
+
+                    bubbleSort(vet,tam-1);
+                    printf("Vetor ordenado por Bubble Sort!\n");
+                    cont++;
+
+                    break;
+                case 3: //Selection
+
+                    selectionSort(vet,tam-1);
+                    printf("Vetor ordenado por Selection Sort!\n");
+                    cont++;
+                    
+                    break;
+                case 4: //Merge
+                    /* code */
+                    break;
+                case 5: //Quick
+                    /* code */
+                    break;
+                case 6: //algoritmo adicional
+                    /* code */
+                    break;
+                
+                default:
+                    printf("Opcao inexistente\n");
+                    break;
+                }
 
                 break;
             
             case 4:
                 
-                                //esta opcao so pode ser executada se algum algoritmo for executado anteriormente.
+                if(cont!=0){//esta opcao so pode ser executada se algum algoritmo for executado anteriormente.
+               
+                    log = fopen("log.txt","w");
+
+
+                    #ifdef _WIN32 //descobre qual OS a maquina está para executar certo algoritmo
+                    
+                    #elif __linux__
+
+                    #endif
+
+                    fprintf(log, "arquivo log\n");
+
+                }else{
+
+                    printf("Para gerar algum log execute algum algoritmo antes!\n");
+
+                }
                 break;
         
             case 5:
@@ -146,6 +210,9 @@ int main()
     
     if(fp!=NULL){ //verifica se o arquivo foi aberto
         fclose(fp); //fecha o arquivo aberto
+        if(log!=NULL){
+            fclose(log);
+        }
     }
         
         free(vet); //A opção 5, antes de ser executada, deverá liberar toda a memora alocada

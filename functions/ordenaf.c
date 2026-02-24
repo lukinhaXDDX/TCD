@@ -1,11 +1,11 @@
 void troca(int a[], int x,int y)
 {
-     int w;
+    int w;
     w=a[x];
     a[x]=a[y];
     a[y]=w;
 }
-void bobbleSort(int a[],int n)
+void bubbleSort(int a[],int n)
 {
      int contador = 1;
     int m=n;
@@ -54,4 +54,29 @@ void insertSort(int vetor[],int size)
             }
         }
     }
+}
+
+
+void selectionSort(int vetor[], int size){
+
+    int temp;
+
+    for(int i = 0; i<size-1; i++){ 
+ 
+        int min = i;
+
+        for(int j = i+1; j<size; j++){
+        
+            if(vetor[j] < vetor[min]){ //verifica qual o menor elemento do vetor na iteração i-ésima
+                min = j; //a posição j-ésima é a menor, daí, agora se compara o próximo elemento 
+            }
+         }
+         if(min!=i){ //so realiza a troca de valores se não estiver ordenado
+            temp = vetor[i]; // troca de valores
+            vetor[i] = vetor[min];
+            vetor[min] = temp;      
+         }
+         
+    }
+
 }
