@@ -80,3 +80,8 @@ void selectionSort(int vetor[], int size){
     }
 
 }
+void funcao()
+{
+
+    return0 ;
+}
